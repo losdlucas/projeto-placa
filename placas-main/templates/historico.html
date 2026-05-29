@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Histórico</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+<header class="header">
+
+    <img src="{{ url_for('static', filename='img/senai.png') }}" class="logo">
+
+</header>
+
+<main>
+
+    <div class="container">
+
+        <h1>📋 Histórico de Placas</h1>
+
+        <p>
+            Últimas detecções realizadas pelo sistema
+        </p>
+
+        <div class="historico-table">
+
+            <table>
+
+                <tr>
+                    <th>Placa</th>
+                    <th>Status</th>
+                    <th>Data/Hora</th>
+                </tr>
+
+                {% for item in dados %}
+
+                <tr>
+
+                    <td>{{ item.placa }}</td>
+
+                    <td>
+
+                        {% if item.status == "ENTRADA AUTORIZADA" %}
+
+                            <span class="status-ok">
+                                {{ item.status }}
+                            </span>
+
+                        {% else %}
+
+                            <span class="status-bad">
+                                {{ item.status }}
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>{{ item.data_hora }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+        <div class="buttons">
+
+            <a href="/">
+                <button>
+                    ⬅ Voltar
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

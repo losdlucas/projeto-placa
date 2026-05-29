@@ -1,0 +1,313 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:'Inter', sans-serif;
+    background:
+        linear-gradient(
+            135deg,
+            #f5f5f5 0%,
+            #ececec 100%
+        );
+
+    color:#1f2937;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:100vh;
+    overflow:hidden;
+}
+
+/* Header vermelho */
+.header{
+    width:100%;
+    background:
+        linear-gradient(
+            90deg,
+            #a30000,
+            #d40000,
+            #ff1a1a
+        );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:18px 0;
+
+    position:absolute;
+    top:0;
+    left:0;
+
+    box-shadow:
+        0 4px 20px rgba(196,0,0,0.35);
+}
+
+/* Logo */
+.logo{
+    height:55px;
+    object-fit:contain;
+
+    filter:
+        drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
+
+/* Container principal */
+.container{
+
+    background:rgba(255,255,255,0.95);
+
+    backdrop-filter:blur(10px);
+
+    padding:45px;
+
+    border-radius:22px;
+
+    text-align:center;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.12),
+        0 0 20px rgba(255,0,0,0.08);
+
+    border-top:6px solid #ff0000;
+
+    width:520px;
+
+    margin-top:90px;
+
+    animation:fade 0.8s ease;
+}
+
+/* Título */
+h1{
+    font-weight:800;
+    margin-bottom:12px;
+    color:#c40000;
+    font-size:36px;
+
+    text-shadow:
+        0 0 10px rgba(255,0,0,0.08);
+}
+
+/* Texto */
+p{
+    color:#6b7280;
+    margin-bottom:30px;
+    font-size:15px;
+    line-height:1.5;
+}
+
+/* Form */
+form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+/* Inputs */
+input{
+
+    background:#f9fafb;
+
+    border:2px solid transparent;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    font-size:15px;
+
+    transition:0.3s;
+
+    outline:none;
+
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,0.05),
+        0 2px 10px rgba(0,0,0,0.04);
+}
+
+/* Placeholder */
+input::placeholder{
+    color:#9ca3af;
+}
+
+/* Focus */
+input:focus{
+
+    border:2px solid #ff1a1a;
+
+    background:white;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 0 15px rgba(255,0,0,0.25),
+        0 0 30px rgba(255,0,0,0.08);
+}
+
+/* Botão */
+button{
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff0000,
+            #c40000
+        );
+
+    border:none;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    box-shadow:
+        0 0 10px rgba(255,0,0,0.35),
+        0 0 20px rgba(255,0,0,0.15);
+}
+
+/* Hover botão */
+button:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.01);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff1a1a,
+            #a30000
+        );
+
+    box-shadow:
+        0 0 20px rgba(255,0,0,0.6),
+        0 0 40px rgba(255,0,0,0.25);
+}
+
+/* Link */
+.cadastro-link{
+
+    display:inline-block;
+
+    margin-top:22px;
+
+    color:#c40000;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:0.3s;
+}
+
+.cadastro-link:hover{
+
+    color:#ff0000;
+
+    text-shadow:
+        0 0 10px rgba(255,0,0,0.3);
+}
+
+/* Erro */
+.erro{
+
+    margin-top:15px;
+
+    color:#dc2626;
+
+    font-weight:700;
+}
+
+/* Status */
+.status{
+
+    margin-top:22px;
+
+    font-size:14px;
+
+    color:#6b7280;
+}
+
+/* Bolinha pulse */
+.pulse{
+
+    width:10px;
+    height:10px;
+
+    background:#ff0000;
+
+    border-radius:50%;
+
+    display:inline-block;
+
+    margin-left:8px;
+
+    animation:pulse 1.2s infinite;
+
+    box-shadow:
+        0 0 10px rgba(255,0,0,0.6);
+}
+
+/* Video */
+.video{
+
+    margin-top:20px;
+
+    width:100%;
+
+    max-width:480px;
+
+    border-radius:14px;
+
+    border:2px solid #e5e7eb;
+}
+
+/* Pulse animation */
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+        opacity:1;
+    }
+
+    50%{
+        transform:scale(1.4);
+        opacity:0.4;
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+/* Fade */
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}

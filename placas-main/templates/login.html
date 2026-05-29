@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Login - Detector SENAI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}"></head>
+
+<body>
+
+<div class="header">
+    <img src="{{ url_for('static', filename='img/senai.png') }}" alt="SENAI" class="logo">
+</div>
+
+<div class="container">
+
+    <h1>🚗 Detector de Placas</h1>
+
+    <p>
+        Faça login para acessar o monitoramento em tempo real
+    </p>
+
+    <form method="POST">
+
+        <input type="email" name="email" placeholder="Digite seu email" required>
+
+        <input type="password" name="senha" placeholder="Digite sua senha" required>
+
+        <button type="submit">
+            Entrar
+        </button>
+
+    </form>
+
+    {% if erro %}
+        <div class="erro">
+            {{ erro }}
+        </div>
+    {% endif %}
+
+    <a href="/cadastro" class="cadastro-link">
+        Criar conta
+    </a>
+
+    <div class="status">
+        Sistema SENAI Online
+        <span class="pulse"></span>
+    </div>
+
+</div>
+
+</body>
+</html>

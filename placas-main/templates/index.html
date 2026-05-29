@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detector de Placas</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <img src="{{ url_for('static', filename='img/senai.png') }}" class="logo">
+
+    </header>
+
+    <main>
+
+        <div class="container">
+
+            <h1>🚗 Detector de Placas</h1>
+
+            <p>
+                Monitoramento inteligente em tempo real
+            </p>
+
+            <div class="camera-container">
+
+                <div class="camera-status">
+                    <span class="pulse"></span>
+                    Sistema Online
+                </div>
+
+                <img src="{{ url_for('video') }}" class="camera">
+
+                <!-- scanner -->
+                <div class="scanner-line"></div>
+
+            </div>
+
+            <div class="buttons">
+
+                <a href="/historico">
+                    <button>
+                        📋 Histórico
+                    </button>
+                </a>
+
+                <a href="/logout">
+                    <button class="logout-btn">
+                        🚪 Sair
+                    </button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
