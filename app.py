@@ -1,9 +1,13 @@
 from flask import Flask, render_template, Response, request, redirect, session, url_for
-from detector_placa import gerar_frames
+from detector_placa import processar_frame
 from database import get_connection
 from psycopg2.extras import RealDictCursor
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
+from flask import jsonify
+import base64
+import cv2
+import numpy as np
 
 load_dotenv()
 
@@ -109,16 +113,31 @@ def logout():
     return redirect("/login")
 
 
-@app.route("/video")
-def video():
+@app.route("/detectar", methods=["POST"])
+def detectar():
 
-    if "usuario" not in session:
-        return redirect("/login")
+    data = request.json["image"]
 
-    return Response(
-        gerar_frames(),
-        mimetype='multipart/x-mixed-replace; boundary=frame'
+    encoded = data.split(",")[1]
+
+    image_bytes = base64.b64decode(encoded)
+
+    npimg = np.frombuffer(
+        image_bytes,
+        np.uint8
     )
+
+    frame = cv2.imdecode(
+        npimg,
+        cv2.IMREAD_COLOR
+    )
+
+    placa, status = processar_frame(frame)
+
+    return jsonify({
+        "placa": placa,
+        "status": status
+    })
 
 
 @app.route("/historico")
@@ -143,8 +162,5 @@ def historico():
     return render_template("historico.html", dados=dados)
 
 
-import os
-
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)

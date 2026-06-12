@@ -444,3 +444,17 @@ tr:hover{
 
     font-weight:700;
 }
+
+#resultado{
+    margin-top:20px;
+    text-align:center;
+}
+
+#resultado h2{
+    color:#00ff88;
+    font-size:32px;
+}
+
+#resultado h3{
+    color:white;
+}

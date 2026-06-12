@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detector de Placas</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <img src="{{ url_for('static', filename='img/senai.png') }}" class="logo">
+
+    </header>
+
+    <main>
+
+        <div class="container">
+
+            <h1>🚗 Detector de Placas</h1>
+
+            <p>
+                Monitoramento inteligente em tempo real
+            </p>
+
+            <div class="camera-container">
+
+                <div class="camera-status">
+                    <span class="pulse"></span>
+                    Sistema Online
+                </div>
+
+<video
+    id="video"
+    class="camera"
+    autoplay
+    muted
+    playsinline>
+</video>
+
+<canvas
+    id="canvas"
+    style="display:none;">
+</canvas>
+
+<div id="resultado"></div>
+
+                <!-- scanner -->
+                <div class="scanner-line"></div>
+
+            </div>
+
+            <div class="buttons">
+
+                <a href="/historico">
+                    <button>
+                        📋 Histórico
+                    </button>
+                </a>
+
+                <a href="/logout">
+                    <button class="logout-btn">
+                        🚪 Sair
+                    </button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+<script>
+
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const resultado = document.getElementById("resultado");
+
+async function iniciarCamera() {
+
+    const stream =
+        await navigator.mediaDevices.getUserMedia({
+            video: true
+        });
+
+    video.srcObject = stream;
+}
+
+iniciarCamera();
+
+setInterval(async () => {
+
+    if (!video.videoWidth) return;
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.drawImage(
+        video,
+        0,
+        0
+    );
+
+    const image =
+        canvas.toDataURL(
+            "image/jpeg",
+            0.7
+        );
+
+    const response = await fetch(
+        "/detectar",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type":
+                    "application/json"
+            },
+            body: JSON.stringify({
+                image
+            })
+        }
+    );
+
+    const data =
+        await response.json();
+
+    if (data.placa) {
+
+        resultado.innerHTML =
+        `
+        <h2>${data.placa}</h2>
+        <h3>${data.status}</h3>
+        `;
+    }
+
+}, 1000);
+
+</script>
+</body>
+</html>

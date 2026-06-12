@@ -1,7 +1,0 @@
-flask
-opencv-python-headless
-pytesseract
-numpy
-gunicorn
-psycopg2-binary
-python-dotenv
